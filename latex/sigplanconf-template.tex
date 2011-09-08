@@ -1,0 +1,98 @@
+%-----------------------------------------------------------------------------
+%
+%               Template for sigplanconf LaTeX Class
+%
+% Name:         sigplanconf-template.tex
+%
+% Purpose:      A template for sigplanconf.cls, which is a LaTeX 2e class
+%               file for SIGPLAN conference proceedings.
+%
+% Author:       Paul C. Anagnostopoulos
+%               Windfall Software
+%               978 371-2316
+%               paul@windfall.com
+%
+% Created:      15 February 2005
+%
+%-----------------------------------------------------------------------------
+
+\documentclass[preprint, cm, 10pt]{sigplanconf}
+%\documentclass[cm, 10pt]{sigplanconf}
+
+% The following \documentclass options may be useful:
+%
+% 10pt          To set in 10-point type instead of 9-point.
+% 11pt          To set in 11-point type instead of 9-point.
+% authoryear    To obtain author/year citation style instead of numeric.
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{url}
+
+
+\begin{document}
+%\lefthyphenmin=64
+
+
+\titlebanner{COP 6616 Research Project}        % These are ignored unless
+%\preprintfooter{short description of paper}   % 'preprint' option specified.
+
+\title{Using Dynamic Analysis to derive DUMPI Trace Files for Automatic Extraction of Software Skeletons for Large-Scale Parallel Applications }
+%\subtitle{Subtitle Text, if any}
+
+\authorinfo{}
+
+%\authorinfo{Amruth R Dakshinamurthy\and Ramya Pradhan \and Damian Dechev}
+%           {University of Central Florida\\Orlando, FL 32816\\}
+%           {amruth.rd@knights.ucf.edu, ramya.pradhan@knights.ucf.edu, dechev@eecs.ucf.edu}
+
+\maketitle
+
+
+\section*{Team Members}
+Amruth R Dakshinamurthy (amruth.rd@knights.ucf.edu) \\
+Ramya Pradhan (ramya.pradhan@knights.ucf.edu)
+
+\section*{Brief Description of the Project}
+We plan to do dynamic analysis of a large-scale parallel graph implementation in C++ using ROSE compiler. ROSE provides capabilities for doing dynamic analysis using the Intel Pin Framework. We will instrument the target application using the Pin tool and generate a MPI trace of the program. We will convert this trace file into DUMPI trace file using libdumpi library provided by SST simulator and execute the resulting trace file on the simulator to obtain information such as cache misses, floating point operations and timestamp for entry and exit to each routine. We will use this information to add annotations to the AST of the original program and perform slicing using automatic extraction framework to obtain software skeleton model of the program. 
+\\
+The following components will be used for implementing the project.
+\\
+\\
+{\it ROSE Compiler} \cite{Rose}  is an open source-to-source compiler infrastructure for building a wide variety of customized analysis, optimization and transformation tools. It enables rapid development of source-to-source translators from C, C++, UPC, and Fortran codes to facilitate deep analysis of complex application codes and code transformations.
+\\
+\\
+{\it SST Simulator} \cite{Sandia}  is an open source simulation package that enables evaluation of large-scale parallel machines. The simulator is implemented in C++ \cite{Stroustrup00} with a modular design, permitting multiple computation and communication models to be employed. The SST/macro simulator provides several network and processor models \cite{Janssen10}.The network models fully support MPI and several interconnects including fat-tree, arbitrary dimension meshes and tori, and gamma graph.
+\\
+\\
+{\it Intel Pin Framework} \cite{Pin} is a tool for the dynamic instrumentation of programs. It supports Linux binary executables for Intel (R) Xscale (R), IA-32, Intel64 (64 bit x86), and Itanium (R) processors; Windows executables for IA-32 and Intel64; and MacOS executables for IA-32.Pin allows a tool to insert arbitrary code (written in C or C++) in arbitrary places in the executable. The code is added dynamically while the executable is running. This also makes it possible to attach Pin to an already running process.
+
+% We recommend abbrvnat bibliography style.
+
+\bibliographystyle{abbrvnat}
+
+% The bibliography should be embedded for final submission.
+
+\begin{thebibliography}{10}
+\softraggedright
+
+\bibitem[Rose et~al.(2006)Rose]{Rose}ROSE Compiler, \url {http://www.roseCompiler.org}.
+
+\bibitem[Sandia et~al.(2006)Sandia]{Sandia}The Structural Simulation Toolkit, \url {https://software.sandia.gov/}.
+
+\bibitem[Pin et~al.(2006)Pin]{Pin}Intel Pin Tool, \url{http://www.pintool.org/}.
+
+\bibitem[MPI et~al.(2006)MPI]{MPI}Message Passing Interface Forum, 2008, \url{http://www.mpi-forum.org/}.
+
+\bibitem[Janssen et~al.(2010)Janssen, Adalsteinsson, Cranford, Kenny, Pinar, Evensky, Mayo]{Janssen10} C. L. Janssen, H. Adalsteinsson, S. Cranford, J. P. Kenny, A. Pinar, D. A. Evensky, J. Mayo. A Simulator for Large-Scale Parallel Computer Architectures. International Journal of Distributed Systems and Technologies (IJDST), 1(2), 57-73. 2010.
+
+\bibitem[Adve et~al.(2002)Adve, Bagrodia, Deelman, Sakellariou]{Adve02} V. S. Adve, R. Bagrodia, E. Deelman, and R. Sakellariou. Compiler-optimized simulation of large-scale applications on high performance architectures. J. Parallel Distrib. Comput., 62(3):393–426, 2002.
+
+\bibitem[Stroustrup et~al.(2000)Stroustrup]{Stroustrup00}B. Stroustrup. The C++ Programming Language. Addison-Wesley Longman Publishing Co., Inc., Boston, MA, USA, 2000.
+
+\bibitem[VSEditor et~al(2009VSEditor)]{VSEditor}V. S. (editor). Exascale Computing Software Study: Software Challenges in Extreme Scale Systems. DARPA IPTO Report, 2009.
+
+\end{thebibliography}
+
+\end{document}
