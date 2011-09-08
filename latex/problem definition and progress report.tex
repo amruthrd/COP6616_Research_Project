@@ -1,0 +1,77 @@
+\documentclass[10pt, twocolumn]{article}
+%\usepackage{epsfig}
+\usepackage{graphicx}
+
+\title{Using Dynamic Analysis to derive Trace Files for Automatic Extraction of SST Software Skeletons for Large-Scale Parallel Applications}
+\author{Ramya Pradhan and Amruth R Dakshinamurthy}
+\parskip=0.3cm
+
+\parindent=0cm
+\textheight=8.5in
+\textwidth=6.2in
+\oddsidemargin=0.1in
+\evensidemargin=0.1in
+\topmargin=-0.3in
+\itemsep=0cm
+\setcounter{topnumber}{4}
+\setcounter{bottomnumber}{0}
+\def\topfraction{1.0}       %maximum fraction of floats at the top of the page
+\def\textfraction{.20}        %minimum fraction of text (100% floats is okay)
+\def\floatpagefraction{0.8} %if a page is full of floats, it'd better be FULL
+
+\begin{document}
+\maketitle
+\section{Problem definition}
+With the growth of high-performance computing systems, understanding the behavior and performance of large-scale parallel applications on those architectures has become extremely difficult. Applications and algorithms need to constantly keep evolving to adapt to the new high-performance architectures to efficiently use the amount of parallelism offered by them. The hardware/software co-design addresses this problem through a design methodology by allowing feedback between application development and hardware design. The design methodology is itself complex since it involves analysing the design parameters of both hardware and software such as cache sizes, network architectures, algorithms and programming models employed.  
+
+Our approach to analyse the design parameters uses program analysis and simulation mechanisms to determine the effects of varying hardware and software design parameters on scalability of large-scale parallel application on exascale machines.  
+
+The program analysis encompasses both dynamic and static analyses on the intended application. The dyamic analysis generates application trace files which reveal statistical data such as average execution time, cache misses, and control flow. The skeleton extraction framework uses static analysis along with the information obtained during dynamic analysis to extract skeleton model of the application. The combined approach of using dynamic analysis and static analysis to generate skeleton models accurately represents the original application in skeleton form. 
+
+The skeleton model will be executed on SST simulator to predict the application performance based on a number of hardware/software parameters such as number of nodes, processors per node, network architecture, bandwidth, algorithm and programming models among others. This helps in the study of application scalability on exascale architectures.
+
+
+\section{Related work}
+
+
+
+\section{Approach taken to solve the issue}
+We plan to use matrix multiplication application as a canonical example for demonstrating our hardware/software co-design methodology. The application will be implemented in C++ using MPI programming model.  The reason for using MPI programming model is to demonstrate the effect of communication patterns in an application on its scalability for exascale machines. 
+
+We plan to use ROSE compiler and Intel Pin framework as tools for carrying out the dynamic analysis on this application.  ROSE compiler is an open source-to-source compiler infrastructure for building a wide variety of customized analysis, optimization and transformation tools. It enables rapid development of source-to-source translators from C, C++, UPC, and Fortran codes to facilitate deep analysis of complex application codes and code transformations. Intel Pin framework is a tool for the dynamic instrumentation of programs. It supports Linux binary executables for Intel (R) Xscale (R), IA-32, Intel64 (64 bit x86), and Itanium (R) processors; Windows executables for IA-32 and Intel64; and MacOS executables for IA-32.Pin allows a tool to insert arbitrary code (written in C or C++) in arbitrary places in the executable. The code is added dynamically while the executable is running. This also makes it possible to attach Pin to an already running process.  ROSE provides the capability to integrate Intel Pin framework for doing dynamic analysis.
+
+The result of dynamic analysis is  a trace file of the application which reveals statistical data such as average execution time, cache misses, and control flow.  This information coupled with the original application is fed to the skeleton extraction framework developed using the ROSE compiler to extract the software skeleton model of the application.  This skeleton will then be executed on SST simulator. 
+
+The SST simulator is an open source simulation package that enables evaluation of large-scale parallel machines. The simulator is implemented in C++ with a modular design, permitting multiple computation and communication models to be employed. The SST/macro simulator provides several network and processor models. The network models fully support MPI and several interconnects including fat-tree, arbitrary dimension meshes and tori, and gamma graph.  The results of this simulation determines the performance of the application for various exascale architectures.  This helps in reliably predicting the intended architecture for a large scale parallel application.
+
+\section{Anticipated results}
+Intermediate results:
+\begin{enumerate}
+\item Trace file from dynamic analysis reveal runtime statistical data.
+\item Software skeleton of an application.
+\end{enumerate}
+
+Final results:
+\begin{enumerate}
+\item The simulation provides an estimated execution times of the application on various exascale architectures.
+\end{enumerate}
+
+\section{Current progress}
+\begin{enumerate}
+\item We have the skeleton extraction framework prototype which performs static analysis on a given application.
+\item Discussion of the approach. 
+\end{enumerate}
+
+\section{Remaining tasks}
+
+\begin{enumerate}
+\item C++ implementation of matrix multiplication algorithm using MPI.
+\item Installation of ROSE Compiler and Intel Pin Framework for doing Dynamic Analysis.
+\item Generation trace file for matrix multiplication program using ROSE and Intel Pin.
+\item Analysis of the trace file to obtain run-time statictical data.
+\item Generation of matrix multiplication program Skeleton using the run-time data obtained from the trace file, and automatic skeleton framework that employs static analysis.
+\item Execution of matrix multiplication program Skeleton on the Structural Simulation Toolkit to obtain simulation results on exascale architures.
+\item Analysis of the simulation results obtained from the above step.
+\end{enumerate}
+
+\end{document}
